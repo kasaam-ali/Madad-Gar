@@ -1,0 +1,26 @@
+{
+  "name": "madadgar",
+  "version": "1.0.0",
+  "description": "Madadgar — Pakistan Citizen Services Directory & Official Procedural Guide",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000 -o",
+    "start": "npx -y http-server -p 3000"
+  },
+  "keywords": [
+    "madadgar",
+    "pakistan",
+    "citizen-services",
+    "government-portal",
+    "nadra",
+    "passport",
+    "driving-license",
+    "fbr-tax"
+  ],
+  "author": "Kasaam Ali",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kasaam-ali/Madad-Gar.git"
+  }
+}
