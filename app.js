@@ -1,6 +1,5 @@
 // =========================================================================
-// PakGov Navigator — Application Controller
-// Professional English Edition with Theme Toggle, Real-time Search & Filter
+// Madadgar — Multi-Language Controller (English, Roman Urdu, Urdu)
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,20 +12,25 @@ const THEME_ICONS = {
 };
 
 const App = {
+  activeLang: 'en',
   activeCategory: 'all',
   searchQuery: '',
   activeService: null,
+  activeModalTab: 'documents',
   checklistState: {}, // Stores checked document state per service ID
 
   init() {
     this.initTheme();
+    this.initLanguage();
     this.bindDOM();
+    this.applyLanguageStrings();
     this.renderCards();
     this.attachEvents();
   },
 
+  // ---------------- Theme Management ----------------
   initTheme() {
-    const savedTheme = localStorage.getItem('pakgov_theme') || 'dark';
+    const savedTheme = localStorage.getItem('madadgar_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     this.updateThemeButton(savedTheme);
   },
@@ -49,8 +53,104 @@ const App = {
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('pakgov_theme', newTheme);
+    localStorage.setItem('madadgar_theme', newTheme);
     this.updateThemeButton(newTheme);
+  },
+
+  // ---------------- Language Management ----------------
+  initLanguage() {
+    this.activeLang = localStorage.getItem('madadgar_lang') || 'en';
+    document.documentElement.setAttribute('lang', this.activeLang);
+    document.documentElement.setAttribute('dir', this.activeLang === 'ur' ? 'rtl' : 'ltr');
+  },
+
+  setLanguage(lang) {
+    this.activeLang = lang;
+    localStorage.setItem('madadgar_lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ur' ? 'rtl' : 'ltr');
+    
+    this.applyLanguageStrings();
+    this.renderCards();
+    if (this.activeService) {
+      this.openModal(this.activeService);
+    }
+  },
+
+  t(key, replacements = {}) {
+    const dict = UI_STRINGS[this.activeLang] || UI_STRINGS.en;
+    let str = dict[key] || UI_STRINGS.en[key] || key;
+    Object.entries(replacements).forEach(([k, v]) => {
+      str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), v);
+    });
+    return str;
+  },
+
+  getLocalized(fieldObj) {
+    if (!fieldObj) return '';
+    if (typeof fieldObj === 'string') return fieldObj;
+    return fieldObj[this.activeLang] || fieldObj.en || fieldObj['ur-ro'] || '';
+  },
+
+  applyLanguageStrings() {
+    const safeSet = (id, html) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    };
+
+    safeSet('top-bar-status', this.t('topBarStatus'));
+    safeSet('top-bar-services', this.t('topBarServices'));
+    safeSet('top-bar-no-fees', this.t('topBarNoFees'));
+    safeSet('brand-title', this.t('brandTitle'));
+    safeSet('brand-sub', this.t('brandSub'));
+    safeSet('nav-services', this.t('navServices'));
+    safeSet('nav-rights', this.t('navRights'));
+    safeSet('nav-helplines', this.t('navHelplines'));
+    safeSet('hero-tag-text', this.t('heroTag'));
+    safeSet('hero-heading', this.t('heroHeading'));
+    safeSet('hero-lead', this.t('heroLead'));
+
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.placeholder = this.t('searchPlaceholder');
+
+    safeSet('pill-all', this.t('allServices'));
+    safeSet('pill-identity', this.t('catIdentity'));
+    safeSet('pill-travel', this.t('catTravel'));
+    safeSet('pill-transport', this.t('catTransport'));
+    safeSet('pill-finance', this.t('catFinance'));
+    safeSet('pill-utilities', this.t('catUtilities'));
+
+    safeSet('dir-title', this.t('dirTitle'));
+    safeSet('dir-desc', this.t('dirDesc'));
+    safeSet('no-results-title', this.t('noResultsTitle'));
+    safeSet('no-results-desc', this.t('noResultsDesc'));
+    safeSet('reset-filter-btn', this.t('resetFilter'));
+
+    safeSet('guidelines-title', this.t('guidelinesTitle'));
+    safeSet('guidelines-sub', this.t('guidelinesSub'));
+    safeSet('guide-1-title', this.t('guide1Title'));
+    safeSet('guide-1-desc', this.t('guide1Desc'));
+    safeSet('guide-2-title', this.t('guide2Title'));
+    safeSet('guide-2-desc', this.t('guide2Desc'));
+    safeSet('guide-3-title', this.t('guide3Title'));
+    safeSet('guide-3-desc', this.t('guide3Desc'));
+
+    safeSet('helplines-title', this.t('helplinesTitle'));
+    safeSet('helplines-desc', this.t('helplinesDesc'));
+
+    safeSet('modal-tab-doc-label', this.t('tabDocs'));
+    safeSet('modal-tab-process-label', this.t('tabProcess'));
+    safeSet('modal-tab-fees-label', this.t('tabFees'));
+    safeSet('print-btn-text', this.t('printBtn'));
+    safeSet('progress-title', this.t('progressTitle'));
+
+    safeSet('footer-text', this.t('footerText'));
+    safeSet('footer-disclaimer', `<strong>${this.t('disclaimer').split(':')[0]}:</strong> ${this.t('disclaimer').split(':').slice(1).join(':')}`);
+    safeSet('footer-copyright', this.t('copyright'));
+
+    // Set select value
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) langSelect.value = this.activeLang;
   },
 
   bindDOM() {
@@ -62,6 +162,7 @@ const App = {
     this.noResults = document.getElementById('no-results');
     this.resetFilterBtn = document.getElementById('reset-filter-btn');
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
+    this.langSelect = document.getElementById('lang-select');
 
     // Modal elements
     this.modalBackdrop = document.getElementById('modal-backdrop');
@@ -81,19 +182,21 @@ const App = {
     const q = this.searchQuery.toLowerCase().trim();
     return SERVICES_DATA.filter(service => {
       const matchesCat = this.activeCategory === 'all' || service.category === this.activeCategory;
-      const matchesSearch = !q || (
-        service.title.toLowerCase().includes(q) ||
-        service.issuingAuthority.toLowerCase().includes(q) ||
-        service.shortDesc.toLowerCase().includes(q) ||
-        service.documents.some(d => d.name.toLowerCase().includes(q))
-      );
-      return matchesCat && matchesSearch;
+      if (!matchesCat) return false;
+      if (!q) return true;
+
+      const title = this.getLocalized(service.title).toLowerCase();
+      const auth = this.getLocalized(service.issuingAuthority).toLowerCase();
+      const desc = this.getLocalized(service.shortDesc).toLowerCase();
+      const hasDoc = service.documents.some(d => this.getLocalized(d.name).toLowerCase().includes(q));
+
+      return title.includes(q) || auth.includes(q) || desc.includes(q) || hasDoc;
     });
   },
 
   renderCards() {
     const filtered = this.getFilteredServices();
-    this.resultsCount.textContent = `Showing ${filtered.length} of ${SERVICES_DATA.length} verified services`;
+    this.resultsCount.textContent = this.t('showingResults', { count: filtered.length, total: SERVICES_DATA.length });
 
     if (filtered.length === 0) {
       this.grid.innerHTML = '';
@@ -108,18 +211,18 @@ const App = {
           <div class="card-icon-wrapper">
             ${ICONS[service.iconKey] || ICONS.certificate}
           </div>
-          <span class="card-tag">${service.tag}</span>
+          <span class="card-tag">${this.getLocalized(service.tag)}</span>
         </div>
-        <div class="card-authority">${service.issuingAuthority}</div>
-        <h3 class="card-title">${service.title}</h3>
-        <p class="card-desc">${service.shortDesc}</p>
+        <div class="card-authority">${this.getLocalized(service.issuingAuthority)}</div>
+        <h3 class="card-title">${this.getLocalized(service.title)}</h3>
+        <p class="card-desc">${this.getLocalized(service.shortDesc)}</p>
         <div class="card-meta-row">
           <span class="meta-item">
             ${ICONS.certificate}
-            <span>${service.documents.length} Required Docs</span>
+            <span>${service.documents.length} ${this.t('tabDocs')}</span>
           </span>
           <span class="card-action">
-            View Guide
+            ${this.t('viewGuide')}
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
           </span>
         </div>
@@ -143,6 +246,13 @@ const App = {
   },
 
   attachEvents() {
+    // Language change
+    if (this.langSelect) {
+      this.langSelect.addEventListener('change', (e) => {
+        this.setLanguage(e.target.value);
+      });
+    }
+
     // Theme toggle button
     if (this.themeToggleBtn) {
       this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
@@ -206,6 +316,7 @@ const App = {
         this.modalTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const tabType = tab.getAttribute('data-tab');
+        this.activeModalTab = tabType;
         this.renderModalTab(tabType);
       });
     });
@@ -218,13 +329,13 @@ const App = {
     }
 
     this.modalIconBadge.innerHTML = ICONS[service.iconKey] || ICONS.certificate;
-    this.modalAuthority.textContent = service.issuingAuthority;
-    this.modalTitle.textContent = service.title;
+    this.modalAuthority.textContent = this.getLocalized(service.issuingAuthority);
+    this.modalTitle.textContent = this.getLocalized(service.title);
     this.tabDocCount.textContent = service.documents.length;
 
-    // Reset to first tab
-    this.modalTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === 'documents'));
-    this.renderModalTab('documents');
+    // Reset to active tab
+    this.modalTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === this.activeModalTab));
+    this.renderModalTab(this.activeModalTab);
 
     this.modalBackdrop.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -247,8 +358,8 @@ const App = {
       let html = `
         <div class="doc-group">
           <div class="section-subhead">
-            <span>Mandatory Required Documents (${requiredDocs.length})</span>
-            <span style="font-size:0.75rem; color:var(--text-muted);">Check off items as you prepare</span>
+            <span>${this.t('reqDocsTitle')} (${requiredDocs.length})</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">${this.t('reqDocsSub')}</span>
           </div>
           <div class="doc-list">
             ${requiredDocs.map((doc, idx) => {
@@ -261,10 +372,10 @@ const App = {
                     ${isChecked ? ICONS.check : ''}
                   </div>
                   <div class="doc-info">
-                    <div class="doc-name">${doc.name}</div>
-                    <div class="doc-note">${doc.note}</div>
+                    <div class="doc-name">${this.getLocalized(doc.name)}</div>
+                    <div class="doc-note">${this.getLocalized(doc.note)}</div>
                   </div>
-                  <span class="badge-req">Required</span>
+                  <span class="badge-req">${this.t('requiredBadge')}</span>
                 </label>
               `;
             }).join('')}
@@ -276,7 +387,7 @@ const App = {
         html += `
           <div class="doc-group">
             <div class="section-subhead">
-              <span>Conditional / Case-Specific Documents (${optionalDocs.length})</span>
+              <span>${this.t('optDocsTitle')} (${optionalDocs.length})</span>
             </div>
             <div class="doc-list">
               ${optionalDocs.map((doc, idx) => {
@@ -289,10 +400,10 @@ const App = {
                       ${isChecked ? ICONS.check : ''}
                     </div>
                     <div class="doc-info">
-                      <div class="doc-name">${doc.name}</div>
-                      <div class="doc-note">${doc.note}</div>
+                      <div class="doc-name">${this.getLocalized(doc.name)}</div>
+                      <div class="doc-note">${this.getLocalized(doc.note)}</div>
                     </div>
-                    <span class="badge-opt">Conditional</span>
+                    <span class="badge-opt">${this.t('conditionalBadge')}</span>
                   </label>
                 `;
               }).join('')}
@@ -307,28 +418,30 @@ const App = {
 
     } else if (tabType === 'process') {
       this.modalBody.innerHTML = `
-        <div class="section-subhead">Official Procedural Workflow (${s.process.length} Stages)</div>
+        <div class="section-subhead">${this.t('tabProcess')} (${s.process.length})</div>
         <div class="steps-timeline">
           ${s.process.map(stepItem => `
             <div class="timeline-step">
               <div class="step-badge">${stepItem.step}</div>
               <div class="step-body">
-                <h4 class="step-title">${stepItem.title}</h4>
-                <p class="step-desc">${stepItem.desc}</p>
+                <h4 class="step-title">${this.getLocalized(stepItem.title)}</h4>
+                <p class="step-desc">${this.getLocalized(stepItem.desc)}</p>
               </div>
             </div>
           `).join('')}
         </div>
       `;
     } else if (tabType === 'fees') {
+      const tipsList = Array.isArray(s.advisoryTips) ? s.advisoryTips : (s.advisoryTips[this.activeLang] || s.advisoryTips.en || []);
+
       this.modalBody.innerHTML = `
         <div class="info-block">
-          <div class="section-subhead">Official Prescribed Fee Schedule</div>
+          <div class="section-subhead">${this.t('feeTableFee')}</div>
           <table class="fee-table">
             <thead>
               <tr>
-                <th>Service Type / Tier</th>
-                <th>Prescribed Official Fee</th>
+                <th>${this.t('feeTableType')}</th>
+                <th>${this.t('feeTableFee')}</th>
               </tr>
             </thead>
             <tbody>
@@ -343,20 +456,20 @@ const App = {
         </div>
 
         <div class="info-block">
-          <div class="section-subhead">Office Hours, Portals & Contacts</div>
+          <div class="section-subhead">${this.t('tabFees')}</div>
           <div class="meta-details-grid">
             <div class="meta-detail-card">
               <div class="meta-detail-icon">${ICONS.clock}</div>
               <div>
-                <strong>Working Hours</strong>
-                <p>${s.timing}</p>
+                <strong>${this.t('hoursLabel')}</strong>
+                <p>${this.getLocalized(s.timing)}</p>
               </div>
             </div>
 
             <div class="meta-detail-card">
               <div class="meta-detail-icon">${ICONS.globe}</div>
               <div>
-                <strong>Official Portal</strong>
+                <strong>${this.t('portalLabel')}</strong>
                 <p><a href="${s.officialPortal}" target="_blank" rel="noopener">${s.officialPortal.replace('https://', '')} ${ICONS.externalLink}</a></p>
               </div>
             </div>
@@ -364,21 +477,21 @@ const App = {
             <div class="meta-detail-card">
               <div class="meta-detail-icon">${ICONS.phone}</div>
               <div>
-                <strong>Inquiry Helpline</strong>
+                <strong>${this.t('helplineLabel')}</strong>
                 <p>${s.helpline}</p>
               </div>
             </div>
           </div>
         </div>
 
-        ${s.advisoryTips && s.advisoryTips.length > 0 ? `
+        ${tipsList && tipsList.length > 0 ? `
           <div class="advisory-box">
             <div class="advisory-title">
               ${ICONS.info}
-              <span>Official Citizen Advisory & Best Practices</span>
+              <span>${this.t('advisoryTitle')}</span>
             </div>
             <ul class="advisory-list">
-              ${s.advisoryTips.map(tip => `<li>${tip}</li>`).join('')}
+              ${tipsList.map(tip => `<li>${tip}</li>`).join('')}
             </ul>
           </div>
         ` : ''}
@@ -420,6 +533,6 @@ const App = {
 
     const percentage = totalReq > 0 ? Math.round((checkedCount / totalReq) * 100) : 0;
     this.progressBarFill.style.width = `${percentage}%`;
-    this.progressStatusText.textContent = `${checkedCount} of ${totalReq} mandatory items ready (${percentage}%)`;
+    this.progressStatusText.textContent = this.t('progressStatus', { count: checkedCount, total: totalReq, percent: percentage });
   }
 };

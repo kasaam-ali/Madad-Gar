@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PakGov Navigator — Professional Civic Tech Design System
-   Comprehensive Light & Dark Theme Support with Seamless Switching
+   PakGov Navigator / Madadgar — Professional Civic Tech Design System
+   Comprehensive Light & Dark Theme + Full RTL & Urdu Nastaliq Support
    ========================================================================== */
 
 /* Dark Theme (Default) */
@@ -94,6 +94,22 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Urdu Font Family Support */
+html[lang="ur"] body {
+  font-family: 'Noto Nastaliq Urdu', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  line-height: 1.9;
+}
+
+html[lang="ur"] .hero-heading {
+  line-height: 1.6;
+}
+
+html[lang="ur"] .card-title,
+html[lang="ur"] .modal-title,
+html[lang="ur"] .section-title {
+  line-height: 1.6;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -128,6 +144,7 @@ body {
   height: 8px;
   background-color: var(--emerald-500);
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .top-bar-right {
@@ -206,12 +223,12 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .nav-item {
@@ -224,6 +241,30 @@ body {
 
 .nav-item:hover {
   color: var(--text-title);
+}
+
+/* Language Selector Dropdown */
+.lang-selector-wrapper {
+  position: relative;
+}
+
+.lang-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  color: var(--text-title);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-select:focus,
+.lang-select:hover {
+  border-color: var(--emerald-500);
 }
 
 /* Theme Toggle Button */
@@ -282,9 +323,9 @@ body {
 }
 
 .hero-heading {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.85rem, 4.2vw, 3.25rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   color: var(--text-title);
   margin-bottom: 1rem;
@@ -321,6 +362,11 @@ body {
   pointer-events: none;
 }
 
+html[dir="rtl"] .search-icon {
+  left: auto;
+  right: 1.25rem;
+}
+
 #search-input {
   width: 100%;
   padding: 0.95rem 3rem 0.95rem 3.25rem;
@@ -333,6 +379,10 @@ body {
   outline: none;
   transition: all 0.15s ease;
   box-shadow: var(--shadow-card);
+}
+
+html[dir="rtl"] #search-input {
+  padding: 0.95rem 3.25rem 0.95rem 3rem;
 }
 
 #search-input:focus {
@@ -357,6 +407,11 @@ body {
   align-items: center;
   justify-content: center;
   padding: 4px;
+}
+
+html[dir="rtl"] .clear-search {
+  right: auto;
+  left: 1rem;
 }
 
 .clear-search:hover {
@@ -540,6 +595,10 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+}
+
+html[dir="rtl"] .card-action svg {
+  transform: rotate(180deg);
 }
 
 /* No Results State */
@@ -1033,6 +1092,11 @@ body {
   background-color: var(--border-subtle);
 }
 
+html[dir="rtl"] .timeline-step:not(:last-child)::after {
+  left: auto;
+  right: 1.15rem;
+}
+
 .step-badge {
   width: 2.35rem;
   height: 2.35rem;
@@ -1089,6 +1153,10 @@ body {
   color: var(--text-body);
   font-weight: 700;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+html[dir="rtl"] .fee-table th {
+  text-align: right;
 }
 
 .fee-table td {
@@ -1175,7 +1243,12 @@ body {
   padding-left: 1.25rem;
   font-size: 0.825rem;
   color: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.7;
+}
+
+html[dir="rtl"] .advisory-list {
+  padding-left: 0;
+  padding-right: 1.25rem;
 }
 
 .advisory-list li {
@@ -1308,10 +1381,13 @@ body {
     padding: 2.5rem 0 2rem;
   }
   .hero-heading {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
   }
   .top-bar-right, .nav-links {
     display: none;
+  }
+  .header-right {
+    gap: 0.5rem;
   }
   .services-grid {
     grid-template-columns: 1fr;
