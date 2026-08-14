@@ -1,307 +1,344 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" dir="ltr">
+<html lang="en" dir="ltr" class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madadgar — Pakistan Citizen Services Directory & Official Guide</title>
-    <meta name="description" content="Madadgar: Verified, step-by-step procedural guides for Pakistan citizen services — NADRA CNIC, Passport, Driving License, Domicile, FBR Tax Filer registration, Birth Certificates, and Utilities.">
-    <meta name="keywords" content="Madadgar, NADRA CNIC process, Pakistan Passport fee, Driving license procedure Pakistan, Domicile documents, FBR Tax filer guide, Police character certificate, WAPDA connection">
+    <title>Madadgar — Pakistan Citizen Services Guide</title>
+    <meta name="description" content="Step-by-step requirements, official fees, and document checklists for NADRA, Passports, Licenses, and Utilities.">
+    <meta name="keywords" content="Madadgar, Pakistan citizen services, NADRA CNIC, Passport fee, Driving license Pakistan, Domicile, FBR Tax filer, Form-B, WAPDA connection">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              pakgreen: {
+                50: '#f0fdf4',
+                100: '#dcfce7',
+                600: '#16a34a',
+                700: '#0A5C2C',
+                800: '#01411C',
+                900: '#012912',
+              }
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              urdu: ['"Noto Nastaliq Urdu"', '"Plus Jakarta Sans"', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace']
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
-<body>
-    <!-- Top Announcement Bar -->
-    <div class="top-bar">
-        <div class="container top-bar-content">
-            <div class="top-bar-left">
-                <span class="status-indicator"></span>
-                <span id="top-bar-status">Verified Citizen Guidance Portal &bull; Updated for Fiscal Year 2025–2026</span>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-150 overflow-x-hidden">
+
+    <!-- Top Gov-Style Announcement Bar -->
+    <div class="bg-pakgreen-800 text-white text-xs py-2 px-4 border-b border-pakgreen-900">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span id="top-bar-status" class="font-medium">Government of Pakistan • Citizen Information Portal</span>
             </div>
-            <div class="top-bar-right">
-                <a href="#services" class="top-bar-link" id="top-bar-services">8 Verified Services</a>
-                <span class="divider">|</span>
+            <div class="flex items-center gap-3 text-emerald-100 text-[11px]">
                 <span id="top-bar-no-fees">No Unofficial Agent Fees</span>
+                <span>•</span>
+                <span>100% Free Public Guide</span>
             </div>
         </div>
     </div>
 
-    <!-- Main Navigation Header -->
-    <header class="header" id="header">
-        <div class="container header-content">
-            <a href="#" class="brand" id="brand-link">
-                <div class="brand-badge">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <!-- Main Header -->
+    <header class="bg-white dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 shadow-sm backdrop-blur transition-colors duration-150">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 no-underline text-slate-900 dark:text-white" title="Madadgar Home">
+                <div class="w-10 h-10 rounded-lg bg-pakgreen-700 text-white flex items-center justify-center font-bold shadow-sm">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
-                <div class="brand-text">
-                    <span class="brand-title" id="brand-title">Madadgar</span>
-                    <span class="brand-sub" id="brand-sub">Citizen Services Directory</span>
+                <div>
+                    <span class="block text-xl font-extrabold tracking-tight text-pakgreen-800 dark:text-pakgreen-100" id="brand-title">Madadgar</span>
+                    <span class="block text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider -mt-1" id="brand-sub">Citizen Services Guide</span>
                 </div>
             </a>
-            
-            <div class="header-right">
-                <nav class="nav-links">
-                    <a href="#services" class="nav-item" id="nav-services">Browse Services</a>
-                    <a href="#guidelines" class="nav-item" id="nav-rights">Citizen Rights</a>
-                    <a href="#faqs" class="nav-item" id="nav-helplines">Helplines</a>
+
+            <!-- Navigation, Language Selector & Dark Mode Toggle -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <nav class="hidden md:flex items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300 mr-2">
+                    <a href="#services" class="hover:text-pakgreen-700 dark:hover:text-emerald-400 transition" id="nav-services">Services</a>
+                    <a href="#guidelines" class="hover:text-pakgreen-700 dark:hover:text-emerald-400 transition" id="nav-rights">Citizen Rights</a>
+                    <a href="#helplines" class="hover:text-pakgreen-700 dark:hover:text-emerald-400 transition" id="nav-helplines">Helplines</a>
                 </nav>
 
-                <!-- Language Selector -->
-                <div class="lang-selector-wrapper">
-                    <select id="lang-select" class="lang-select" aria-label="Select Language">
-                        <option value="en">English</option>
-                        <option value="ur-ro">Roman Urdu</option>
-                        <option value="ur">اردو (Urdu)</option>
-                    </select>
+                <!-- Language Switcher -->
+                <div class="relative" title="Select Language / زبان منتخب کریں">
+                    <label for="lang-select" class="sr-only">Choose language</label>
+                    <div class="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1.5 gap-1.5 focus-within:border-pakgreen-700">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-500 dark:text-slate-400"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <select id="lang-select" class="bg-transparent text-xs font-bold text-slate-800 dark:text-slate-100 cursor-pointer outline-none" aria-label="Language Selector">
+                            <option value="en">English</option>
+                            <option value="ur-ro">Roman Urdu</option>
+                            <option value="ur">اردو (Urdu)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Light / Dark Theme Toggle Button -->
-                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle light and dark mode">
-                    <span class="theme-toggle-icon" id="theme-toggle-icon">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <!-- Dark Mode Toggle Button with Tooltip -->
+                <button id="theme-toggle-btn" class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition" aria-label="Toggle Theme" title="Toggle Light / Dark theme">
+                    <span id="theme-toggle-icon">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     </span>
-                    <span id="theme-toggle-text">Dark</span>
+                    <span id="theme-toggle-text" class="hidden sm:inline">Dark</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-tag" id="hero-tag">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span id="hero-tag-text">Independent, Verified Citizen Resource</span>
-            </div>
+    <!-- Compact Hero & Search Section -->
+    <section class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-8 px-4 transition-colors duration-150">
+        <div class="max-w-4xl mx-auto text-center">
             
-            <h1 class="hero-heading" id="hero-heading">
-                Step-by-Step Pakistan <br>
-                <span class="highlight-text">Government Service Guides</span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2" id="hero-heading">
+                Pakistan Citizen Services Guide
             </h1>
             
-            <p class="hero-lead" id="hero-lead">
-                Eliminate middlemen commissions and procedural confusion. Access accurate document checklists, certified government fee schedules, and verified office workflows.
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-6" id="hero-lead">
+                Step-by-step requirements, official fees, and document checklists for NADRA, Passports, Licenses, and Utilities.
             </p>
 
-            <!-- Search and Filter Controls -->
-            <div class="search-box-wrapper">
-                <div class="search-input-group">
-                    <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" id="search-input" placeholder="Search by service name, document, or authority (e.g. NADRA, Passport, FBR)..." autocomplete="off">
-                    <button id="clear-search-btn" class="clear-search hidden" aria-label="Clear search">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </button>
+            <!-- Large Accessible Search Box -->
+            <div class="relative max-w-2xl mx-auto mb-4">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </div>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Search services (e.g. CNIC Renewal, New Passport, Driving License, Tax Filer, Form-B)..." 
+                    class="w-full pl-11 pr-10 py-3.5 bg-slate-50 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-medium text-sm sm:text-base placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-900 focus:border-pakgreen-700 dark:focus:border-emerald-500 focus:outline-none focus:ring-4 focus:ring-pakgreen-100 dark:focus:ring-emerald-950 transition shadow-inner rtl:pl-10 rtl:pr-11"
+                    autocomplete="off"
+                    title="Type any keyword to filter services"
+                >
+                <button id="clear-search-btn" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-700 dark:hover:text-white hidden rtl:right-auto rtl:left-0 rtl:pl-3" aria-label="Clear search" title="Clear search text">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
             </div>
 
-            <!-- Category Pills -->
-            <div class="category-pills" id="category-pills">
-                <button class="pill active" data-category="all" id="pill-all">All Services</button>
-                <button class="pill" data-category="identity" id="pill-identity">Identity & Civil</button>
-                <button class="pill" data-category="travel" id="pill-travel">Passport & Travel</button>
-                <button class="pill" data-category="transport" id="pill-transport">Driving & Transport</button>
-                <button class="pill" data-category="finance" id="pill-finance">Taxation & FBR</button>
-                <button class="pill" data-category="utilities" id="pill-utilities">Public Utilities</button>
+            <!-- Instant Shortcut Pills with Clear Tooltips -->
+            <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
+                <span class="font-semibold text-slate-500 dark:text-slate-400" id="shortcut-label">Popular:</span>
+                <button class="shortcut-pill bg-slate-100 dark:bg-slate-800 hover:bg-pakgreen-50 dark:hover:bg-slate-700 hover:text-pakgreen-800 dark:hover:text-white hover:border-pakgreen-600 text-slate-700 dark:text-slate-200 font-semibold px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 transition" data-search="CNIC" title="Filter: NADRA CNIC Services">
+                    شناختی کارڈ / CNIC
+                </button>
+                <button class="shortcut-pill bg-slate-100 dark:bg-slate-800 hover:bg-pakgreen-50 dark:hover:bg-slate-700 hover:text-pakgreen-800 dark:hover:text-white hover:border-pakgreen-600 text-slate-700 dark:text-slate-200 font-semibold px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 transition" data-search="Passport" title="Filter: Passport Issuance & Renewal">
+                    پاسپورٹ / Passport
+                </button>
+                <button class="shortcut-pill bg-slate-100 dark:bg-slate-800 hover:bg-pakgreen-50 dark:hover:bg-slate-700 hover:text-pakgreen-800 dark:hover:text-white hover:border-pakgreen-600 text-slate-700 dark:text-slate-200 font-semibold px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 transition" data-search="License" title="Filter: Motor Vehicle Driving License">
+                    ڈرائیونگ لائسنس / License
+                </button>
+                <button class="shortcut-pill bg-slate-100 dark:bg-slate-800 hover:bg-pakgreen-50 dark:hover:bg-slate-700 hover:text-pakgreen-800 dark:hover:text-white hover:border-pakgreen-600 text-slate-700 dark:text-slate-200 font-semibold px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 transition" data-search="Electricity" title="Filter: New WAPDA/Electricity Meter Connection">
+                    بجلی کا میٹر / Electricity
+                </button>
+                <button class="shortcut-pill bg-slate-100 dark:bg-slate-800 hover:bg-pakgreen-50 dark:hover:bg-slate-700 hover:text-pakgreen-800 dark:hover:text-white hover:border-pakgreen-600 text-slate-700 dark:text-slate-200 font-semibold px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700 transition" data-search="Form-B" title="Filter: Child Birth Registration / Form-B">
+                    فارم بی / Form-B
+                </button>
             </div>
+
         </div>
     </section>
 
     <!-- Services Grid Section -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title" id="dir-title">Government Services Directory</h2>
-                    <p class="section-desc" id="dir-desc">Select any service to view required documents checklist, fees, timelines, and step-by-step submission steps.</p>
+    <main class="flex-grow py-8 px-4" id="services">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Category Pills Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex flex-wrap gap-1.5" id="category-pills">
+                    <button class="pill active px-3.5 py-1.5 rounded-md text-xs font-bold bg-pakgreen-700 text-white shadow-sm" data-category="all" id="pill-all" title="Show all verified citizen services">All Services</button>
+                    <button class="pill px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700" data-category="identity" id="pill-identity" title="Filter: Identity & Civil Services">Identity (NADRA)</button>
+                    <button class="pill px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700" data-category="travel" id="pill-travel" title="Filter: Passports & Travel">Passport & Travel</button>
+                    <button class="pill px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700" data-category="transport" id="pill-transport" title="Filter: Driving & Transport">Driving License</button>
+                    <button class="pill px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700" data-category="finance" id="pill-finance" title="Filter: FBR Tax & NTN Registration">FBR Tax Filer</button>
+                    <button class="pill px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700" data-category="utilities" id="pill-utilities" title="Filter: Electricity & Gas Connections">Electricity & Gas</button>
                 </div>
-                <div class="results-count" id="results-count">Showing all 8 verified services</div>
+                <div class="text-xs font-bold text-slate-500 dark:text-slate-400" id="results-count">
+                    Showing 8 of 8 services
+                </div>
             </div>
 
-            <div class="services-grid" id="services-grid">
-                <!-- Dynamically rendered by app.js -->
+            <!-- Dynamic Service Cards Grid (High Density) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="services-grid">
+                <!-- Injected by app.js -->
             </div>
 
-            <div id="no-results" class="no-results hidden">
-                <div class="no-results-icon">
-                    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            <!-- No Results Box -->
+            <div id="no-results" class="hidden text-center py-12 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl my-6">
+                <div class="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-300 mx-auto flex items-center justify-center mb-3">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </div>
-                <h3 id="no-results-title">No Matching Services Found</h3>
-                <p id="no-results-desc">Try searching for different keywords or select a different category filter.</p>
-                <button class="btn btn-secondary" id="reset-filter-btn">Reset All Filters</button>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1" id="no-results-title">No Services Found</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 mb-4" id="no-results-desc">Try searching with a simpler keyword.</p>
+                <button class="px-4 py-2 bg-pakgreen-700 text-white rounded-lg text-xs font-bold hover:bg-pakgreen-800" id="reset-filter-btn" title="Reset all search filters">
+                    Show All Services
+                </button>
             </div>
+
         </div>
-    </section>
+    </main>
 
-    <!-- Citizen Operational Guidelines -->
-    <section class="guidelines-section" id="guidelines">
-        <div class="container">
-            <div class="guidelines-card">
-                <div class="guidelines-header">
-                    <div class="guidelines-badge">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    <!-- Citizen Anti-Fraud Advisory Section -->
+    <section class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 px-4 transition-colors duration-150" id="guidelines">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 rounded-xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-9 h-9 rounded-lg bg-pakgreen-100 dark:bg-emerald-950 text-pakgreen-800 dark:text-emerald-300 flex items-center justify-center font-bold">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
                     <div>
-                        <h2 class="guidelines-title" id="guidelines-title">Citizen Rights & Counter-Fraud Guidelines</h2>
-                        <p class="guidelines-sub" id="guidelines-sub">Safeguard your documents and avoid paying unauthorized commissions</p>
+                        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white" id="guidelines-title">Citizen Protection & Counter-Fraud Advisory</h2>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300" id="guidelines-sub">Important official rules to keep your money and identity safe</p>
                     </div>
                 </div>
 
-                <div class="guidelines-grid">
-                    <div class="guideline-item">
-                        <div class="guideline-num">01</div>
-                        <h3 id="guide-1-title">Never Hand Over Original CNIC to Touts</h3>
-                        <p id="guide-1-desc">Official registration centers only view originals on desk for verification and scan copies. Never surrender originals to unauthorized agents outside offices.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-bold font-mono text-pakgreen-700 dark:text-emerald-400 mb-1">RULE 01</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5" id="guide-1-title">Never Pay Outside Agents</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" id="guide-1-desc">All fees must be deposited directly at bank counters, NADRA e-Sahulat, or through official 1Link/e-Pay digital channels. Agents standing outside have no legal authority.</p>
                     </div>
 
-                    <div class="guideline-item">
-                        <div class="guideline-num">02</div>
-                        <h3 id="guide-2-title">Verify Electronic PSID Payments</h3>
-                        <p id="guide-2-desc">All modern state fees (Passports, e-Challan, FBR) now support direct 1Link/e-Pay digital bank transfers. Always pay directly from your banking app using standard PSID numbers.</p>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-bold font-mono text-pakgreen-700 dark:text-emerald-400 mb-1">RULE 02</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5" id="guide-2-title">Keep Original Documents Safe</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" id="guide-2-desc">Government officers only inspect original documents at the counter for immediate visual verification. Never leave original cards with anyone.</p>
                     </div>
 
-                    <div class="guideline-item">
-                        <div class="guideline-num">03</div>
-                        <h3 id="guide-3-title">Insist on Official Machine Receipts</h3>
-                        <p id="guide-3-desc">Ensure every token, form submission, and fee deposit provides a computerized computer-printed tracking receipt with a timestamp and official serial number.</p>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <div class="text-xs font-bold font-mono text-pakgreen-700 dark:text-emerald-400 mb-1">RULE 03</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-sm mb-1.5" id="guide-3-title">Always Take Computerized Receipts</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed" id="guide-3-desc">Every valid token, fee deposit, or application provides an official printed tracking receipt. Always verify the tracking number.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Emergency Helplines & Portals Reference -->
-    <section class="helplines-section" id="faqs">
-        <div class="container">
-            <h2 class="section-title text-center" id="helplines-title">Verified Government Portals & Helplines</h2>
-            <p class="section-desc text-center" id="helplines-desc">Direct official contact channels for inquiries and escalation.</p>
+    <!-- Verified Helplines Directory -->
+    <section class="bg-slate-100 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 py-8 px-4 transition-colors duration-150" id="helplines">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white text-center mb-1" id="helplines-title">Verified Department Helplines</h2>
+            <p class="text-xs text-slate-600 dark:text-slate-300 text-center mb-6" id="helplines-desc">Official phone numbers for queries and complaints.</p>
 
-            <div class="helplines-grid">
-                <div class="helpline-card">
-                    <div class="helpline-title">NADRA Public Helpline</div>
-                    <div class="helpline-contact">1777 (Mobile) / 051-111-786-100</div>
-                    <a href="https://www.nadra.gov.pk" target="_blank" rel="noopener" class="helpline-link">
-                        nadra.gov.pk
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    </a>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 text-center">
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">NADRA Helpline</div>
+                    <div class="text-xs font-mono font-bold text-pakgreen-700 dark:text-emerald-400 my-1">1777 / 051-111-786-100</div>
+                    <a href="https://www.nadra.gov.pk" target="_blank" rel="noopener" class="text-[11px] text-slate-500 dark:text-slate-400 hover:text-pakgreen-700 flex items-center justify-center gap-1" title="Visit NADRA Official Website">nadra.gov.pk <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
                 </div>
 
-                <div class="helpline-card">
-                    <div class="helpline-title">Directorate General Passports</div>
-                    <div class="helpline-contact">051-111-344-777</div>
-                    <a href="https://dgip.gov.pk" target="_blank" rel="noopener" class="helpline-link">
-                        dgip.gov.pk
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    </a>
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 text-center">
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">Passports (DGIP)</div>
+                    <div class="text-xs font-mono font-bold text-pakgreen-700 dark:text-emerald-400 my-1">051-111-344-777</div>
+                    <a href="https://dgip.gov.pk" target="_blank" rel="noopener" class="text-[11px] text-slate-500 dark:text-slate-400 hover:text-pakgreen-700 flex items-center justify-center gap-1" title="Visit DGIP Passports Official Website">dgip.gov.pk <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
                 </div>
 
-                <div class="helpline-card">
-                    <div class="helpline-title">Federal Board of Revenue (FBR)</div>
-                    <div class="helpline-contact">051-111-772-772</div>
-                    <a href="https://iris.fbr.gov.pk" target="_blank" rel="noopener" class="helpline-link">
-                        iris.fbr.gov.pk
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    </a>
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 text-center">
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">Tax Filer (FBR)</div>
+                    <div class="text-xs font-mono font-bold text-pakgreen-700 dark:text-emerald-400 my-1">051-111-772-772</div>
+                    <a href="https://iris.fbr.gov.pk" target="_blank" rel="noopener" class="text-[11px] text-slate-500 dark:text-slate-400 hover:text-pakgreen-700 flex items-center justify-center gap-1" title="Visit FBR IRIS Portal">iris.fbr.gov.pk <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
                 </div>
 
-                <div class="helpline-card">
-                    <div class="helpline-title">National Power Emergency</div>
-                    <div class="helpline-contact">Dial 118 (Any Network)</div>
-                    <a href="https://enc.com.pk" target="_blank" rel="noopener" class="helpline-link">
-                        enc.com.pk
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    </a>
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-lg border border-slate-200 dark:border-slate-700 text-center">
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">Power Emergency</div>
+                    <div class="text-xs font-mono font-bold text-pakgreen-700 dark:text-emerald-400 my-1">Dial 118 (All Networks)</div>
+                    <a href="https://enc.com.pk" target="_blank" rel="noopener" class="text-[11px] text-slate-500 dark:text-slate-400 hover:text-pakgreen-700 flex items-center justify-center gap-1" title="Visit ENC Electricity Portal">enc.com.pk <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Modal Dialog for Service Detail -->
-    <div class="modal-backdrop" id="modal-backdrop">
-        <div class="modal-dialog" id="service-modal" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-slate-900/60 dark:bg-black/70 z-50 flex items-center justify-center p-3 sm:p-5 hidden" id="modal-backdrop">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-xl shadow-2xl border border-slate-300 dark:border-slate-700 max-h-[90vh] flex flex-col overflow-hidden transition-colors duration-150" id="service-modal" role="dialog" aria-modal="true">
+            
             <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="modal-header-info">
-                    <div class="modal-icon-badge" id="modal-icon-badge"></div>
+            <div class="px-5 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-pakgreen-100 dark:bg-emerald-950 text-pakgreen-800 dark:text-emerald-300 flex items-center justify-center flex-shrink-0" id="modal-icon-badge"></div>
                     <div>
-                        <div class="modal-authority" id="modal-authority"></div>
-                        <h2 class="modal-title" id="modal-title"></h2>
+                        <div class="text-[11px] font-bold text-pakgreen-700 dark:text-emerald-400 uppercase tracking-wider" id="modal-authority"></div>
+                        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white" id="modal-title"></h2>
                     </div>
                 </div>
-                <div class="modal-actions">
-                    <button class="btn-icon" id="print-checklist-btn" title="Print this Document Checklist">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <div class="flex items-center gap-2">
+                    <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold" id="print-checklist-btn" title="Print a clean A4 checklist for your office visit">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
                         <span id="print-btn-text">Print</span>
                     </button>
-                    <button class="btn-icon btn-close" id="modal-close-btn" aria-label="Close modal">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700" id="modal-close-btn" aria-label="Close modal" title="Close this window (Esc)">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
             </div>
 
             <!-- Modal Nav Tabs -->
-            <div class="modal-tabs">
-                <button class="modal-tab active" data-tab="documents" id="tab-btn-docs">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    <span id="modal-tab-doc-label">Document Checklist</span> (<span id="tab-doc-count">0</span>)
+            <div class="flex bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-5 gap-2 overflow-x-auto text-xs font-bold">
+                <button class="modal-tab active py-3 px-3 border-b-2 border-pakgreen-700 text-pakgreen-800 dark:text-emerald-400 flex items-center gap-1.5 whitespace-nowrap" data-tab="documents" id="tab-btn-docs" title="Required documents checklist">
+                    <span id="modal-tab-doc-label">1. Prepare Documents</span> (<span id="tab-doc-count">0</span>)
                 </button>
-                <button class="modal-tab" data-tab="process" id="tab-btn-process">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                    <span id="modal-tab-process-label">Step-by-Step Procedure</span>
+                <button class="modal-tab py-3 px-3 border-b-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="process" id="tab-btn-process" title="Step-by-step application procedure">
+                    <span id="modal-tab-process-label">2. Step-by-Step Procedure</span>
                 </button>
-                <button class="modal-tab" data-tab="fees" id="tab-btn-fees">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    <span id="modal-tab-fees-label">Fees, Timings & Portals</span>
+                <button class="modal-tab py-3 px-3 border-b-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="fees" id="tab-btn-fees" title="Fee breakdown and office timings">
+                    <span id="modal-tab-fees-label">3. Fees & Office Timings</span>
                 </button>
             </div>
 
-            <!-- Modal Tab Content Area -->
-            <div class="modal-body" id="modal-body">
+            <!-- Modal Content Area -->
+            <div class="p-5 overflow-y-auto flex-grow" id="modal-body">
                 <!-- Dynamically injected -->
             </div>
 
-            <!-- Modal Footer Progress Tracker -->
-            <div class="modal-footer">
-                <div class="progress-container">
-                    <div class="progress-label-row">
-                        <span class="progress-title" id="progress-title">Document Readiness Checklist</span>
-                        <span class="progress-status-text" id="progress-status-text">0 of 0 verified</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-bar-fill" id="progress-bar-fill"></div>
-                    </div>
+            <!-- Modal Progress Tracker Footer -->
+            <div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700">
+                <div class="flex justify-between text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
+                    <span id="progress-title">Document Readiness Checklist</span>
+                    <span class="font-mono font-bold text-pakgreen-700 dark:text-emerald-400" id="progress-status-text">0 of 0 ready (0%)</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="bg-pakgreen-700 dark:bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%" id="progress-bar-fill"></div>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    <span>Madadgar</span>
+    <!-- Official Government Style Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-8 px-4 text-xs border-t-4 border-pakgreen-700">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2.5">
+                <div class="w-6 h-6 rounded bg-pakgreen-700 text-white flex items-center justify-center font-bold text-xs">🇵🇰</div>
+                <div>
+                    <span class="font-bold text-white text-sm">Madadgar</span> — <span id="footer-text">Public Service Information Resource for Pakistani Citizens</span>
                 </div>
-                <p class="footer-text" id="footer-text">
-                    An independent, non-governmental public service initiative providing structured information for Pakistani citizens.
-                </p>
             </div>
-            
-            <div class="footer-meta">
-                <div class="disclaimer-badge" id="footer-disclaimer">
-                    <strong>Disclaimer:</strong> Procedural requirements and official fee structures are compiled from official gazettes and portals. Verify with local departments for real-time updates.
-                </div>
-                <div class="copyright-text" id="footer-copyright">
-                    &copy; 2026 Madadgar &bull; Built for Pakistani Citizens
-                </div>
+            <div class="text-slate-400 text-center sm:text-right" id="footer-copyright">
+                &copy; 2026 Madadgar • Free & Open Public Resource
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="data.js?v=5"></script>
-    <script src="app.js?v=5"></script>
+    <script src="data.js?v=8"></script>
+    <script src="app.js?v=8"></script>
 </body>
 </html>
